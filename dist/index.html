@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>诗</title>
+         <link rel="manifest" href="./manifest.json">
+        <script src="./lib.js" ></script>
+        <link rel="stylesheet" href="./fonts.css">
+<style>
+html, body {
+    height: 100%
+}
+body {
+    margin:0;
+}
+.vtext {
+    -webkit-writing-mode: vertical-rl;
+    -o-writing-mode: vertical-rl;
+	-moz-writing-mode: vertical-rl;
+	writing-mode:tb-rl;
+	letter-spacing:2px;
+}
+.poetry-list {
+    list-style-type: none;
+}
+.poetry-list li {
+    cursor:default;
+}
+.poetry-list li:hover {
+    background: gray;
+    color:  white;
+}
+</style>
+    </head>
+    <body>
+
+        <div id="_main_" style="height:100%">
+        </div>
+        <script>
+            (function(M){
+                M.init(document.getElementById("_main_"))
+            })(reflexiv)
+        </script>
+    </body>
+</html>

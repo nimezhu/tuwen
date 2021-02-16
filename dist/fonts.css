@@ -1,0 +1,37 @@
+@font-face {
+        font-family: XinDiZhaoMeng-1;
+        src: url(fonts/XinDiZhaoMeng-1.woff) format("woff");
+}
+
+@font-face {
+        font-family: YanTiF;
+        src: url(fonts/YanTi.woff2) format("woff2");
+}
+@font-face {
+        font-family: YanTiJ;
+        src: url(fonts/YanJianTi.woff) format("woff");
+}
+
+
+@font-face {
+        font-family: BeiWeiTiF;
+        src: url(fonts/MengNaFanWeiBei-1.woff) format("woff");
+}
+
+@font-face {
+        font-family: BeiWeiTiJ;
+        src: url(fonts/HYBeiWeiXieJingJ-2.woff) format("woff");
+}
+
+@font-face {
+        font-family: ZhuanJ;
+        src: url(fonts/Zhuan.woff) format("woff");
+}
+
+@font-face {
+        font-family: HandWriting;
+        src: url(fonts/cjkfonts_handingwriting4.woff) format("woff");
+}
+
+
+

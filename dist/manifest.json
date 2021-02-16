@@ -1,0 +1,23 @@
+{
+  "short_name": "诗",
+  "name": "诗",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "./img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#EEE",
+  "display": "standalone",
+  "scope": "/tuwen/",
+  "theme_color": "#EEE"
+}
+

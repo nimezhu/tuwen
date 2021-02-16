@@ -1,0 +1,35 @@
+{
+  "name": "tuwen",
+  "version": "0.2.12",
+  "description": "诗",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production -c",
+    "dev": "webpack --mode development  -c",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "keywords": [
+    "poet",
+    "reading",
+    "book"
+  ],
+  "author": "zhuxp",
+  "license": "GPL",
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "html2canvas": "^1.0.0-rc.7",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "gh-pages": "^2.2.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
