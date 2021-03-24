@@ -1,7 +1,7 @@
 importScripts("cache-polyfill.js")
 
 var PREFIX = "tuwen"
-var CACHE_VERSION = 'tuwen-v0.2.12';
+var CACHE_VERSION = 'tuwen-v0.2.12d';
 var CACHE_FILES = [
     "./manifest.json",
     "./lib.js", 
@@ -15,6 +15,7 @@ var CACHE_FILES = [
     "./fonts/Zhuan.woff",
     "./fonts/cjkfonts_handingwriting4.woff",
     "./data/tang300.v4.json",
+    "./data/shijing.json",
     "./img/icon-192.png",
     "./img/icon-512.png"
 ];

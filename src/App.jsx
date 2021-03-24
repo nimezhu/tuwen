@@ -35,10 +35,12 @@ function Sentence(props) {
 function App(props) {
     const [idx, setIdx] = useState(Math.floor(Math.random() * 300))
     const [data, setData] = useState([])
+    const [shiJing, setShiJing] = useState([])
     const myRef = useRef()
 
     const [open, setOpen] = useState(false);
     const [open300, setOpen300] = useState(false);
+    const [openShiJing, setOpenShiJing] = useState(false);
     const [input, setInput] = useState(0);
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
@@ -82,10 +84,24 @@ function App(props) {
     const handleOpen300 = () => {
         setOpen300(true);
     }
+
+    const handleCloseShiJing = () => {
+        setOpenShiJing(false);
+    };
+    const handleOpenShiJing = () => {
+        setOpenShiJing(true);
+    }
+
     const handleSelect = (e) => {
         setIdx(e.target.value)
         setInput(0)
         setOpen300(false)
+    }
+
+    const handleSelectShiJing = (e) => {
+        setIdx(e.target.value)
+        setInput(2)
+        setOpenShiJing(false)
     }
 
 
@@ -174,20 +190,30 @@ function App(props) {
             })
     }, [])
 
+    useEffect(()=>{
+        fetch("./data/shijing.json")
+           .then((d) => (d.json()))
+            .then(function(d) {
+                setShiJing(d)
+            })
+
+    }, [])
+
     return (
         <div style={{overflow:"auto"}}>
         <ServiceWorkerBar worker="/tuwen/sw.js" scope="/tuwen/" />
         <div style={{color:"#EEE",backgroundColor:"#333"}}>
         <div style={{textAlign:"center",paddingTop:"2px"}}>
         <Button onClick={handleInput} style={{color:"#EEE"}}>输入</Button>
-        <Button onClick={handleOpen300} style={{color:"#EEE"}}>选诗</Button>
+        <Button onClick={handleOpenShiJing} style={{color:"#EEE"}}>诗经</Button>
+        <Button onClick={handleOpen300} style={{color:"#EEE"}}>唐诗三百首</Button>
         <Button onClick={handleRandom} style={{color:"#EEE"}}>随机</Button>
         <span>|</span>
         {input==0?<Button onClick={handleWiki} style={{color:"#EEE"}}>维基</Button>:null}
         <Button onClick={handlePng} style={{color:"#EEE"}}>下载为图片</Button>
         <span>|</span>
         <Button onClick={handleVertical} style={{color:"#EEE"}}>{vertical?"竖":"横"}</Button>
-        {input==0?<Button onClick={handleNarrow} style={{color:"#EEE"}}>{narrow?"窄":"宽"}</Button>:null}
+        {input!=1?<Button onClick={handleNarrow} style={{color:"#EEE"}}>{narrow?"窄":"宽"}</Button>:null}
         <Button onClick={handleTextAlign} style={{color:"#EEE"}}>{textAlign=="center"?"居中":"靠边"}</Button>
         
         <select onChange={handleFont} value={font}>
@@ -241,6 +267,22 @@ function App(props) {
             </div>
             </div>):null
         }
+        {
+            shiJing.length>0 && input==2?( <div>
+            <div>{shiJing[idx].title}</div>
+            <div style={{padding:"16px"}}></div>
+            <div>
+            {
+            shiJing[idx].content.map(function(d){
+                var l = d.split(/['\uff0c','\uff1f','\u3002','\uff01','\uff1b']/)
+                return <Sentence data={l} pgap={pgap} vertical={vertical} narrow={narrow}/>
+            })
+            }
+            </div>
+            </div>
+            ):null
+        }
+
             </div>
 
         </div>
@@ -299,6 +341,20 @@ function App(props) {
             </ul>
         </DialogContent>
       </Dialog>
+   
+    <Dialog open={openShiJing} onClose={handleCloseShiJing} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title"></DialogTitle>
+        <DialogContent>
+            <ul class="poetry-list">
+            {
+            shiJing.map((d,i)=>{
+                return (<li onClick={handleSelectShiJing} value={i}>{d.chapter+"-"+ d.title}</li>)
+            })
+            }
+            </ul>
+        </DialogContent>
+      </Dialog>
+
 
     </div>)
 }
