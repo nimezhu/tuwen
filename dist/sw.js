@@ -1,7 +1,7 @@
 importScripts("cache-polyfill.js")
 
 var PREFIX = "tuwen"
-var CACHE_VERSION = 'tuwen-v0.2.12d';
+var CACHE_VERSION = 'tuwen-v0.2.13';
 var CACHE_FILES = [
     "./manifest.json",
     "./lib.js", 
