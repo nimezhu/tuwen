@@ -36,11 +36,14 @@ function App(props) {
     const [idx, setIdx] = useState(Math.floor(Math.random() * 300))
     const [data, setData] = useState([])
     const [shiJing, setShiJing] = useState([])
+    const [song300, setSong300] = useState([])
     const myRef = useRef()
 
     const [open, setOpen] = useState(false);
     const [open300, setOpen300] = useState(false);
+    const [openSong300, setOpenSong300] = useState(false);
     const [openShiJing, setOpenShiJing] = useState(false);
+
     const [input, setInput] = useState(0);
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
@@ -84,6 +87,13 @@ function App(props) {
     const handleOpen300 = () => {
         setOpen300(true);
     }
+    const handleCloseSong300 = () => {
+        setOpenSong300(false);
+    };
+    const handleOpenSong300 = () => {
+        setOpenSong300(true);
+    }
+
 
     const handleCloseShiJing = () => {
         setOpenShiJing(false);
@@ -103,6 +113,12 @@ function App(props) {
         setInput(2)
         setOpenShiJing(false)
     }
+    const handleSelectSong300 = (e) => {
+        setIdx(e.target.value)
+        setInput(3)
+        setOpenSong300(false)
+    }
+
 
 
     const handleRandom = (e) => {
@@ -198,6 +214,15 @@ function App(props) {
             })
 
     }, [])
+  useEffect(()=>{
+        fetch("./data/song300.json")
+           .then((d) => (d.json()))
+            .then(function(d) {
+                setSong300(d)
+            })
+
+    }, [])
+
 
     return (
         <div style={{overflow:"auto"}}>
@@ -207,6 +232,7 @@ function App(props) {
         <Button onClick={handleInput} style={{color:"#EEE"}}>输入</Button>
         <Button onClick={handleOpenShiJing} style={{color:"#EEE"}}>诗经</Button>
         <Button onClick={handleOpen300} style={{color:"#EEE"}}>唐诗三百首</Button>
+        <Button onClick={handleOpenSong300} style={{color:"#EEE"}}>宋词三百首</Button>
         <Button onClick={handleRandom} style={{color:"#EEE"}}>随机</Button>
         <span>|</span>
         {input==0?<Button onClick={handleWiki} style={{color:"#EEE"}}>维基</Button>:null}
@@ -266,6 +292,25 @@ function App(props) {
                 })}
             </div>
             </div>):null
+        }
+        {
+            song300.length>0 && input==3?( <div>
+            <div>{song300[idx].rhythmic}</div>
+            <div style={{fontSize:Math.round(fontSize*2/3)+"px",color:color}}>
+               {song300[idx].author}
+            </div>
+            <div>
+            {
+            
+            song300[idx].paragraphs.map(function(d){
+                var l = d.split(/['\uff0c','\uff1f','\u3002','\uff01','\uff1b','\u3001']/)
+                return <Sentence data={l} pgap={pgap} vertical={vertical} narrow={narrow}/>
+            })
+            
+            }
+            </div>
+            </div>
+            ):null
         }
         {
             shiJing.length>0 && input==2?( <div>
@@ -341,7 +386,20 @@ function App(props) {
             </ul>
         </DialogContent>
       </Dialog>
+     <Dialog open={openSong300} onClose={handleCloseSong300} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title"></DialogTitle>
+        <DialogContent>
+            <ul class="poetry-list">
+            {
+                song300.map((d,i)=>{
+                    return (<li onClick={handleSelectSong300} value={i}>{d.author+"-"+ d.rhythmic}</li>)
+            })
+            }
+            </ul>
+        </DialogContent>
+      </Dialog>
    
+
     <Dialog open={openShiJing} onClose={handleCloseShiJing} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title"></DialogTitle>
         <DialogContent>
